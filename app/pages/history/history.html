@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>History</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="pulltoRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="!loading && favs">
+    <ion-item-sliding *ngFor="let data of historyData">
+      <ion-item>
+        <h1>{{data.type}}</h1>
+        <h3>{{data.text}}</h3>
+      </ion-item>
+      <ion-item-options side="right">
+        <button favorite (click)="openBrowser(data.text)">
+          <ion-icon name="logo-google"></ion-icon>
+        </button>
+        <button primary (click)="saveToClipboard(data.text)">
+          <ion-icon name="clipboard"></ion-icon>
+        </button>
+        <button danger (click)="deleteEntry(data)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+</ion-content>

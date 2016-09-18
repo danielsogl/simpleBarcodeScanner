@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>Scanner</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card no-padding *ngIf="scannerFinished && !cancelled">
+    <ion-card-header>
+      <h2>Type: {{data.format}}</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item text-wrap>
+          <h4>{{data.text}}</h4>
+        </ion-item>
+        <button full round primary (click)="saveToClipboard(data.text)">Save to Clipboard</button>
+        <button full round primary (click)="openBrowser(data.text)">Google it</button>
+        <button full round primary (click)="scanBarcode()">New Scan</button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="cancelled" padding>
+    <h1>Scanner Canceled</h1>
+    <button full round primary  (click)="scanBarcode()">New Scan</button>
+  </div>
+
+
+</ion-content>
